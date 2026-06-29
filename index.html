@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Planejamento Financeiro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Planejamento Financeiro</h2>
+    <div class="meta-info">
+        <strong>Meta do Objetivo:</strong> Notebook de R$ 4.800,00 em 12 meses<br>
+        <strong>Economia necessária:</strong> R$ 400,00 / mês
+    </div>
+
+    <div class="secao-titulo">Receitas</div>
+    <div class="grupo-input">
+        <label for="salario">Salário Mensal Atual:</label>
+        <div class="input-wrapper">
+            <input type="number" id="salario" value="2500" step="0.01" min="0">
+        </div>
+    </div>
+
+    <div class="secao-titulo">Despesas Mensais</div>
+    <div class="grupo-input">
+        <label for="aluguel">Aluguel:</label>
+        <div class="input-wrapper">
+            <input type="number" id="aluguel" value="800" step="0.01" min="0">
+        </div>
+    </div>
+    <div class="grupo-input">
+        <label for="supermercado">Supermercado:</label>
+        <div class="input-wrapper">
+            <input type="number" id="supermercado" value="750" step="0.01" min="0">
+        </div>
+    </div>
+    <div class="grupo-input">
+        <label for="transporte">Transporte:</label>
+        <div class="input-wrapper">
+            <input type="number" id="transporte" value="250" step="0.01" min="0">
+        </div>
+    </div>
+    <div class="grupo-input">
+        <label for="internet">Internet e Celular:</label>
+        <div class="input-wrapper">
+            <input type="number" id="internet" value="150" step="0.01" min="0">
+        </div>
+    </div>
+    <div class="grupo-input">
+        <label for="lazer">Lazer (Flexível):</label>
+        <div class="input-wrapper">
+            <input type="number" id="lazer" value="350" step="0.01" min="0">
+        </div>
+    </div>
+    <div class="grupo-input">
+        <label for="assinaturas">Assinaturas (Flexível):</label>
+        <div class="input-wrapper">
+            <input type="number" id="assinaturas" value="100" step="0.01" min="0">
+        </div>
+    </div>
+
+    <button onclick="calcularSimulacao()">Simular Cenário Orçamentário</button>
+
+    <div class="resultados" id="painelResultados">
+        <h3>Resultado da Análise</h3>
+        <div class="linha-resultado">
+            <span>Total de Receitas:</span>
+            <span>R$ <span id="outReceita">0.00</span></span>
+        </div>
+        <div class="linha-resultado">
+            <span>Total de Despesas:</span>
+            <span>R$ <span id="outDespesas">0.00</span></span>
+        </div>
+        <div class="linha-resultado destaque">
+            <span>Saldo Mensal Disponível:</span>
+            <span>R$ <span id="outSaldo">0.00</span></span>
+        </div>
+        
+        <div id="statusMeta" class="status"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
