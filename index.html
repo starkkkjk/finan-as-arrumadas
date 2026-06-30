@@ -1,87 +1,495 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Planejamento Financeiro</title>
+
+    <title>Smart Finance Planner</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<div class="container">
-    <h2>Planejamento Financeiro</h2>
-    <div class="meta-info">
-        <strong>Meta do Objetivo:</strong> Notebook de R$ 4.800,00 em 12 meses<br>
-        <strong>Economia necessária:</strong> R$ 400,00 / mês
+    <!-- LOADING -->
+
+    <div id="loading">
+
+        <div class="loader"></div>
+
+        <h2>Smart Finance Planner</h2>
+
     </div>
 
-    <div class="secao-titulo">Receitas</div>
-    <div class="grupo-input">
-        <label for="salario">Salário Mensal Atual:</label>
-        <div class="input-wrapper">
-            <input type="number" id="salario" value="2500" step="0.01" min="0">
-        </div>
-    </div>
+    <!-- HEADER -->
 
-    <div class="secao-titulo">Despesas Mensais</div>
-    <div class="grupo-input">
-        <label for="aluguel">Aluguel:</label>
-        <div class="input-wrapper">
-            <input type="number" id="aluguel" value="800" step="0.01" min="0">
-        </div>
-    </div>
-    <div class="grupo-input">
-        <label for="supermercado">Supermercado:</label>
-        <div class="input-wrapper">
-            <input type="number" id="supermercado" value="750" step="0.01" min="0">
-        </div>
-    </div>
-    <div class="grupo-input">
-        <label for="transporte">Transporte:</label>
-        <div class="input-wrapper">
-            <input type="number" id="transporte" value="250" step="0.01" min="0">
-        </div>
-    </div>
-    <div class="grupo-input">
-        <label for="internet">Internet e Celular:</label>
-        <div class="input-wrapper">
-            <input type="number" id="internet" value="150" step="0.01" min="0">
-        </div>
-    </div>
-    <div class="grupo-input">
-        <label for="lazer">Lazer (Flexível):</label>
-        <div class="input-wrapper">
-            <input type="number" id="lazer" value="350" step="0.01" min="0">
-        </div>
-    </div>
-    <div class="grupo-input">
-        <label for="assinaturas">Assinaturas (Flexível):</label>
-        <div class="input-wrapper">
-            <input type="number" id="assinaturas" value="100" step="0.01" min="0">
-        </div>
-    </div>
+    <header id="header">
 
-    <button onclick="calcularSimulacao()">Simular Cenário Orçamentário</button>
+        <div class="logo">
 
-    <div class="resultados" id="painelResultados">
-        <h3>Resultado da Análise</h3>
-        <div class="linha-resultado">
-            <span>Total de Receitas:</span>
-            <span>R$ <span id="outReceita">0.00</span></span>
-        </div>
-        <div class="linha-resultado">
-            <span>Total de Despesas:</span>
-            <span>R$ <span id="outDespesas">0.00</span></span>
-        </div>
-        <div class="linha-resultado destaque">
-            <span>Saldo Mensal Disponível:</span>
-            <span>R$ <span id="outSaldo">0.00</span></span>
-        </div>
-        
-        <div id="statusMeta" class="status"></div>
-    </div>
-</div>
+            <i class="fa-solid fa-chart-line"></i>
 
-<script src="script.js"></script>
+            <span>Smart Finance Planner</span>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li><a href="#inicio">Início</a></li>
+
+                <li><a href="#simulador">Simulador</a></li>
+
+                <li><a href="#analise">Análise</a></li>
+
+                <li><a href="#graficos">Relatório</a></li>
+
+                <li><a href="#sobre">Sobre</a></li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <!-- HERO -->
+
+    <section class="hero" id="inicio">
+
+        <div class="hero-text">
+
+            <h1>Planeje seu Futuro Financeiro</h1>
+
+            <p>
+
+                Simule receitas, despesas e descubra se sua meta financeira será alcançada.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="btn glow" onclick="scrollSimulador()">
+
+                    Iniciar Simulação
+
+                </button>
+
+                <button class="btn secondary">
+
+                    Ver Demonstração
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+
+            <i class="fa-solid fa-wallet"></i>
+
+        </div>
+
+    </section>
+
+    <!-- CARDS -->
+
+    <section class="cards">
+
+        <div class="card reveal">
+
+            <i class="fa-solid fa-money-bill-wave"></i>
+
+            <h3>Receita Mensal</h3>
+
+            <h2 id="cardReceita">
+
+                R$ 2.500
+
+            </h2>
+
+        </div>
+
+        <div class="card reveal">
+
+            <i class="fa-solid fa-credit-card"></i>
+
+            <h3>Despesas</h3>
+
+            <h2 id="cardDespesa">
+
+                R$ 2.400
+
+            </h2>
+
+        </div>
+
+        <div class="card reveal">
+
+            <i class="fa-solid fa-piggy-bank"></i>
+
+            <h3>Saldo Atual</h3>
+
+            <h2 id="cardSaldo">
+
+                R$ 100
+
+            </h2>
+
+        </div>
+
+        <div class="card reveal">
+
+            <i class="fa-solid fa-laptop"></i>
+
+            <h3>Meta</h3>
+
+            <h2>
+
+                Notebook R$ 4.800
+
+            </h2>
+
+        </div>
+
+    </section>
+
+    <!-- SITUAÇÃO -->
+
+    <section class="problema reveal">
+
+        <h2>
+
+            Situação-Problema
+
+        </h2>
+
+        <p>
+
+            Uma pessoa recebe <strong>R$ 2.500</strong> por mês e deseja comprar um notebook de
+            <strong>R$ 4.800</strong> em <strong>12 meses</strong>.
+
+        </p>
+
+        <table>
+
+            <tr>
+
+                <th>Descrição</th>
+
+                <th>Valor</th>
+
+            </tr>
+
+            <tr>
+                <td>Salário</td>
+                <td>R$ 2.500</td>
+            </tr>
+
+            <tr>
+                <td>Aluguel</td>
+                <td>R$ 800</td>
+            </tr>
+
+            <tr>
+                <td>Supermercado</td>
+                <td>R$ 750</td>
+            </tr>
+
+            <tr>
+                <td>Transporte</td>
+                <td>R$ 250</td>
+            </tr>
+
+            <tr>
+                <td>Internet</td>
+                <td>R$150</td>
+            </tr>
+
+            <tr>
+                <td>Lazer</td>
+                <td>R$350</td>
+            </tr>
+
+            <tr>
+                <td>Assinaturas</td>
+                <td>R$100</td>
+            </tr>
+
+            <tr>
+
+                <th>Total</th>
+
+                <th>R$2.400</th>
+
+            </tr>
+
+            <tr>
+
+                <th>Saldo</th>
+
+                <th>R$100</th>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+    <!-- SIMULADOR -->
+
+    <section class="simulador reveal" id="simulador">
+
+        <h2>
+
+            Simulador Financeiro
+
+        </h2>
+
+        <div class="grid">
+
+            <div>
+
+                <label>Receita Mensal</label>
+
+                <input type="number" id="receita" value="2500">
+
+            </div>
+
+            <div>
+
+                <label>Aluguel</label>
+
+                <input type="number" id="aluguel" value="800">
+
+            </div>
+
+            <div>
+
+                <label>Supermercado</label>
+
+                <input type="number" id="mercado" value="750">
+
+            </div>
+
+            <div>
+
+                <label>Transporte</label>
+
+                <input type="number" id="transporte" value="250">
+
+            </div>
+
+            <div>
+
+                <label>Internet</label>
+
+                <input type="number" id="internet" value="150">
+
+            </div>
+
+            <div>
+
+                <label>Lazer</label>
+
+                <input type="number" id="lazer" value="350">
+
+            </div>
+
+            <div>
+
+                <label>Assinaturas</label>
+
+                <input type="number" id="assinaturas" value="100">
+
+            </div>
+
+            <div>
+
+                <label>Preço Notebook</label>
+
+                <input type="number" id="meta" value="4800">
+
+            </div>
+
+            <div>
+
+                <label>Prazo (meses)</label>
+
+                <input type="number" id="meses" value="12">
+
+            </div>
+
+        </div>
+
+        <button id="calcular">
+
+            Calcular
+
+        </button>
+
+    </section>
+
+    <!-- RESULTADO -->
+
+    <section id="analise" class="resultado reveal">
+
+        <h2>
+
+            Resultado da Simulação
+
+        </h2>
+
+        <div id="resultadoBox">
+
+            Clique em Calcular
+
+        </div>
+
+    </section>
+
+    <!-- BARRA -->
+
+    <section class="progresso reveal">
+
+        <h2>
+
+            Economia Acumulada
+
+        </h2>
+
+        <div class="barra">
+
+            <div id="barraProgresso">
+
+                0%
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ANÁLISE -->
+
+    <section class="matematica reveal">
+
+        <h2>
+
+            Análise Matemática
+
+        </h2>
+
+        <div id="analiseMatematica">
+
+        </div>
+
+    </section>
+
+    <!-- CENÁRIOS -->
+
+    <section class="cenarios reveal">
+
+        <h2>
+
+            Simulação de Cenários
+
+        </h2>
+
+        <div class="cenario-buttons">
+
+            <button onclick="reduzirLazer(10)">-10% Lazer</button>
+
+            <button onclick="reduzirLazer(20)">-20% Lazer</button>
+
+            <button onclick="reduzirLazer(50)">-50% Lazer</button>
+
+            <button onclick="cancelarAssinaturas()">Cancelar Assinaturas</button>
+
+            <button onclick="aumentarSalario()">+ Salário</button>
+
+        </div>
+
+    </section>
+
+    <!-- GRÁFICOS -->
+
+    <section class="graficos reveal" id="graficos">
+
+        <h2>
+
+            Relatórios Financeiros
+
+        </h2>
+
+        <div class="charts">
+
+            <canvas id="pizza"></canvas>
+
+            <canvas id="barra"></canvas>
+
+            <canvas id="linha"></canvas>
+
+        </div>
+
+    </section>
+
+    <!-- SOBRE -->
+
+    <section id="sobre" class="sobre reveal">
+
+        <h2>
+
+            Sobre o Projeto
+
+        </h2>
+
+        <p>
+
+            Este sistema demonstra como a matemática e a tecnologia podem auxiliar no planejamento financeiro,
+            permitindo simulações, análises e tomada de decisões de forma prática e intuitiva.
+
+        </p>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+
+            Projeto de Planejamento Financeiro • HTML • CSS • JavaScript • <span id="ano"></span>
+
+        </p>
+
+    </footer>
+
+    <!-- Chart.js -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- JS -->
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
