@@ -1,495 +1,270 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Smart Finance Planner</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-    <!-- CSS -->
+    <title>Planejamento Financeiro | Dashboard Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
-
 </head>
+<body class="dark-mode">
 
-<body>
-
-    <!-- LOADING -->
-
-    <div id="loading">
-
+    <div id="loader" class="loader-container" aria-hidden="true">
         <div class="loader"></div>
-
-        <h2>Smart Finance Planner</h2>
-
     </div>
 
-    <!-- HEADER -->
+    <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
 
-    <header id="header">
-
-        <div class="logo">
-
-            <i class="fa-solid fa-chart-line"></i>
-
-            <span>Smart Finance Planner</span>
-
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#inicio" class="logo" aria-label="Página Inicial Planejamento Financeiro">
+                <i class="fa-solid fa-wallet text-cyan"></i>
+                <span>Planejamento <strong class="text-cyan">Financeiro</strong></span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="navMenu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <nav class="nav-menu" id="navMenu">
+                <a href="#inicio" class="nav-link active">Início</a>
+                <a href="#simulador" class="nav-link">Simulador</a>
+                <a href="#dashboard" class="nav-link">Dashboard</a>
+                <a href="#educacao" class="nav-link">Educação Financeira</a>
+                <a href="#contato" class="nav-link">Contato</a>
+                <button id="themeToggle" class="theme-btn" aria-label="Alternar tema claro/escuro">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
         </div>
-
-        <nav>
-
-            <ul>
-
-                <li><a href="#inicio">Início</a></li>
-
-                <li><a href="#simulador">Simulador</a></li>
-
-                <li><a href="#analise">Análise</a></li>
-
-                <li><a href="#graficos">Relatório</a></li>
-
-                <li><a href="#sobre">Sobre</a></li>
-
-            </ul>
-
-        </nav>
-
     </header>
 
-    <!-- HERO -->
+    <main>
+        <section id="inicio" class="hero-section scroll-reveal">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Organize seu dinheiro e alcance seus <span class="text-cyan">objetivos financeiros</span>.</h1>
+                    <p>Controle receitas, despesas e acompanhe sua evolução financeira de forma simples, intuitiva e totalmente segura.</p>
+                    <div class="hero-buttons">
+                        <a href="#simulador" class="btn btn-primary ripple">Começar Agora</a>
+                        <a href="#educacao" class="btn btn-secondary ripple">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="hero-image" aria-hidden="true">
+                    <div class="vector-art">
+                        <i class="fa-solid fa-chart-line-up"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="hero" id="inicio">
-
-        <div class="hero-text">
-
-            <h1>Planeje seu Futuro Financeiro</h1>
-
-            <p>
-
-                Simule receitas, despesas e descubra se sua meta financeira será alcançada.
-
-            </p>
-
-            <div class="hero-buttons">
-
-                <button class="btn glow" onclick="scrollSimulador()">
-
-                    Iniciar Simulação
-
-                </button>
-
-                <button class="btn secondary">
-
-                    Ver Demonstração
-
-                </button>
-
+        <section id="simulador" class="simulador-section scroll-reveal">
+            <div class="section-title">
+                <h2>Simulador Financeiro</h2>
+                <p>Insira seus dados abaixo para projetar sua saúde financeira e suas metas.</p>
             </div>
 
-        </div>
-
-        <div class="hero-image">
-
-            <i class="fa-solid fa-wallet"></i>
-
-        </div>
-
-    </section>
-
-    <!-- CARDS -->
-
-    <section class="cards">
-
-        <div class="card reveal">
-
-            <i class="fa-solid fa-money-bill-wave"></i>
-
-            <h3>Receita Mensal</h3>
-
-            <h2 id="cardReceita">
-
-                R$ 2.500
-
-            </h2>
-
-        </div>
-
-        <div class="card reveal">
-
-            <i class="fa-solid fa-credit-card"></i>
-
-            <h3>Despesas</h3>
-
-            <h2 id="cardDespesa">
-
-                R$ 2.400
-
-            </h2>
-
-        </div>
-
-        <div class="card reveal">
-
-            <i class="fa-solid fa-piggy-bank"></i>
-
-            <h3>Saldo Atual</h3>
-
-            <h2 id="cardSaldo">
-
-                R$ 100
-
-            </h2>
-
-        </div>
-
-        <div class="card reveal">
-
-            <i class="fa-solid fa-laptop"></i>
-
-            <h3>Meta</h3>
-
-            <h2>
-
-                Notebook R$ 4.800
-
-            </h2>
-
-        </div>
-
-    </section>
-
-    <!-- SITUAÇÃO -->
-
-    <section class="problema reveal">
-
-        <h2>
-
-            Situação-Problema
-
-        </h2>
-
-        <p>
-
-            Uma pessoa recebe <strong>R$ 2.500</strong> por mês e deseja comprar um notebook de
-            <strong>R$ 4.800</strong> em <strong>12 meses</strong>.
-
-        </p>
-
-        <table>
-
-            <tr>
-
-                <th>Descrição</th>
-
-                <th>Valor</th>
-
-            </tr>
-
-            <tr>
-                <td>Salário</td>
-                <td>R$ 2.500</td>
-            </tr>
-
-            <tr>
-                <td>Aluguel</td>
-                <td>R$ 800</td>
-            </tr>
-
-            <tr>
-                <td>Supermercado</td>
-                <td>R$ 750</td>
-            </tr>
-
-            <tr>
-                <td>Transporte</td>
-                <td>R$ 250</td>
-            </tr>
-
-            <tr>
-                <td>Internet</td>
-                <td>R$150</td>
-            </tr>
-
-            <tr>
-                <td>Lazer</td>
-                <td>R$350</td>
-            </tr>
-
-            <tr>
-                <td>Assinaturas</td>
-                <td>R$100</td>
-            </tr>
-
-            <tr>
-
-                <th>Total</th>
-
-                <th>R$2.400</th>
-
-            </tr>
-
-            <tr>
-
-                <th>Saldo</th>
-
-                <th>R$100</th>
-
-            </tr>
-
-        </table>
-
-    </section>
-
-    <!-- SIMULADOR -->
-
-    <section class="simulador reveal" id="simulador">
-
-        <h2>
-
-            Simulador Financeiro
-
-        </h2>
-
-        <div class="grid">
-
-            <div>
-
-                <label>Receita Mensal</label>
-
-                <input type="number" id="receita" value="2500">
-
+            <div class="card glass-card central-card">
+                <form id="financeForm" onsubmit="event.preventDefault();">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="receitaMensal">Receita Mensal (R$)</label>
+                            <input type="number" id="receitaMensal" min="0" step="0.01" required placeholder="Ex: 5000.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="metaFinanceira">Meta Financeira Total (R$)</label>
+                            <input type="number" id="metaFinanceira" min="0" step="0.01" required placeholder="Ex: 20000.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="prazoMeta">Prazo da Meta (Meses)</label>
+                            <input type="number" id="prazoMeta" min="1" required placeholder="Ex: 12">
+                        </div>
+                    </div>
+
+                    <div class="despesas-container">
+                        <h3><i class="fa-solid fa-receipt text-cyan"></i> Despesas Mensais</h3>
+                        <div class="despesa-input-row">
+                            <div class="form-group flex-2">
+                                <label for="nomeDespesa" class="sr-only">Nome da Despesa</label>
+                                <input type="text" id="nomeDespesa" placeholder="Ex: Aluguel, Internet">
+                            </div>
+                            <div class="form-group flex-1">
+                                <label for="valorDespesa" class="sr-only">Valor (R$)</label>
+                                <input type="number" id="valorDespesa" min="0" step="0.01" placeholder="Ex: 1200.00">
+                            </div>
+                            <button type="button" id="btnAddDespesa" class="btn btn-secondary ripple"><i class="fa-solid fa-plus"></i> Add</button>
+                        </div>
+
+                        <ul id="listaDespesas" class="lista-despesas" aria-live="polite">
+                            </ul>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="btnCalcular" class="btn btn-primary ripple"><i class="fa-solid fa-calculator"></i> Calcular</button>
+                        <button type="button" id="btnExemplo" class="btn btn-secondary ripple"><i class="fa-solid fa-wand-magic-sparkles"></i> Preencher Exemplo</button>
+                        <button type="button" id="btnLimpar" class="btn btn-danger ripple"><i class="fa-solid fa-trash"></i> Limpar Dados</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section id="dashboard" class="dashboard-section scroll-reveal hidden">
+            <div class="section-title">
+                <h2>Seu Painel Financeiro</h2>
+                <p>Análise detalhada baseada em seus lançamentos atuais.</p>
             </div>
 
-            <div>
+            <div id="insightAlert" class="insight-card glass-card" aria-live="polite"></div>
 
-                <label>Aluguel</label>
-
-                <input type="number" id="aluguel" value="800">
-
+            <div class="metrics-grid">
+                <div class="card glass-card metric-card">
+                    <div class="metric-icon bg-cyan-alpha"><i class="fa-solid fa-money-bill-wave text-cyan"></i></div>
+                    <div class="metric-info">
+                        <span>Receita Mensal</span>
+                        <h3 id="cardReceita">R$ 0,00</h3>
+                    </div>
+                </div>
+                <div class="card glass-card metric-card">
+                    <div class="metric-icon bg-danger-alpha"><i class="fa-solid fa-money-bill-transfer text-danger"></i></div>
+                    <div class="metric-info">
+                        <span>Despesas Totais</span>
+                        <h3 id="cardDespesas">R$ 0,00</h3>
+                    </div>
+                </div>
+                <div class="card glass-card metric-card">
+                    <div class="metric-icon id-saldo-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <div class="metric-info">
+                        <span>Saldo Mensal</span>
+                        <h3 id="cardSaldo">R$ 0,00</h3>
+                    </div>
+                </div>
+                <div class="card glass-card metric-card">
+                    <div class="metric-icon bg-info-alpha"><i class="fa-solid fa-bullseye text-info"></i></div>
+                    <div class="metric-info">
+                        <span>Meta Financeira</span>
+                        <h3 id="cardMeta">R$ 0,00</h3>
+                    </div>
+                </div>
+                <div class="card glass-card metric-card">
+                    <div class="metric-icon bg-warning-alpha"><i class="fa-solid fa-calendar-days text-warning"></i></div>
+                    <div class="metric-info">
+                        <span>Prazo Estipulado</span>
+                        <h3 id="cardPrazo">0 meses</h3>
+                    </div>
+                </div>
+                <div class="card glass-card metric-card">
+                    <div class="metric-icon bg-purple-alpha"><i class="fa-solid fa-piggy-bank text-purple"></i></div>
+                    <div class="metric-info">
+                        <span>Economia Necessária /mês</span>
+                        <h3 id="cardEcoNecessaria">R$ 0,00</h3>
+                    </div>
+                </div>
+                <div class="card glass-card metric-card">
+                    <div class="metric-icon bg-success-alpha"><i class="fa-solid fa-vault text-success"></i></div>
+                    <div class="metric-info">
+                        <span>Economia Atual /mês</span>
+                        <h3 id="cardEcoAtual">R$ 0,00</h3>
+                    </div>
+                </div>
+                <div class="card glass-card metric-card">
+                    <div class="metric-icon bg-cyan-alpha"><i class="fa-solid fa-percentage text-cyan"></i></div>
+                    <div class="metric-info">
+                        <span>Comprometimento da Renda</span>
+                        <h3 id="cardPercentual">0%</h3>
+                    </div>
+                </div>
             </div>
 
-            <div>
-
-                <label>Supermercado</label>
-
-                <input type="number" id="mercado" value="750">
-
+            <div class="charts-grid">
+                <div class="card glass-card chart-container">
+                    <h3>Balanço Mensal Geral</h3>
+                    <canvas id="barChart"></canvas>
+                </div>
+                <div class="card glass-card chart-container">
+                    <h3>Distribuição das Despesas</h3>
+                    <canvas id="pieChart"></canvas>
+                </div>
             </div>
 
-            <div>
+            <div class="card glass-card report-table-container">
+                <h3><i class="fa-solid fa-file-invoice-dollar text-cyan"></i> Relatório Analítico Executivo</h3>
+                <div class="table-responsive">
+                    <table id="relatorioTabela" class="report-table">
+                        <thead>
+                            <tr>
+                                <th>Indicador Operacional</th>
+                                <th>Valor Referência</th>
+                                <th>Status / Alocação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+                <div class="report-actions">
+                    <button id="btnExportPDF" class="btn btn-secondary ripple"><i class="fa-solid fa-file-pdf text-danger"></i> Exportar PDF</button>
+                    <button id="btnExportExcel" class="btn btn-secondary ripple"><i class="fa-solid fa-file-excel text-success"></i> Exportar Excel</button>
+                    <button id="btnPrint" class="btn btn-secondary ripple"><i class="fa-solid fa-print"></i> Imprimir Relatório</button>
+                </div>
+            </div>
+        </section>
 
-                <label>Transporte</label>
-
-                <input type="number" id="transporte" value="250">
-
+        <section id="educacao" class="educacao-section scroll-reveal">
+            <div class="section-title">
+                <h2>Educação Financeira</h2>
+                <p>Aprenda os pilares fundamentais da estruturação de riqueza e controle patrimonial.</p>
             </div>
 
-            <div>
-
-                <label>Internet</label>
-
-                <input type="number" id="internet" value="150">
-
-            </div>
-
-            <div>
-
-                <label>Lazer</label>
-
-                <input type="number" id="lazer" value="350">
-
-            </div>
-
-            <div>
-
-                <label>Assinaturas</label>
-
-                <input type="number" id="assinaturas" value="100">
-
-            </div>
-
-            <div>
-
-                <label>Preço Notebook</label>
-
-                <input type="number" id="meta" value="4800">
-
-            </div>
-
-            <div>
-
-                <label>Prazo (meses)</label>
-
-                <input type="number" id="meses" value="12">
-
-            </div>
-
-        </div>
-
-        <button id="calcular">
-
-            Calcular
-
-        </button>
-
-    </section>
-
-    <!-- RESULTADO -->
-
-    <section id="analise" class="resultado reveal">
-
-        <h2>
-
-            Resultado da Simulação
-
-        </h2>
-
-        <div id="resultadoBox">
-
-            Clique em Calcular
-
-        </div>
-
-    </section>
-
-    <!-- BARRA -->
-
-    <section class="progresso reveal">
-
-        <h2>
-
-            Economia Acumulada
-
-        </h2>
-
-        <div class="barra">
-
-            <div id="barraProgresso">
-
-                0%
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ANÁLISE -->
-
-    <section class="matematica reveal">
-
-        <h2>
-
-            Análise Matemática
-
-        </h2>
-
-        <div id="analiseMatematica">
-
-        </div>
-
-    </section>
-
-    <!-- CENÁRIOS -->
-
-    <section class="cenarios reveal">
-
-        <h2>
-
-            Simulação de Cenários
-
-        </h2>
-
-        <div class="cenario-buttons">
-
-            <button onclick="reduzirLazer(10)">-10% Lazer</button>
-
-            <button onclick="reduzirLazer(20)">-20% Lazer</button>
-
-            <button onclick="reduzirLazer(50)">-50% Lazer</button>
-
-            <button onclick="cancelarAssinaturas()">Cancelar Assinaturas</button>
-
-            <button onclick="aumentarSalario()">+ Salário</button>
-
-        </div>
-
-    </section>
-
-    <!-- GRÁFICOS -->
-
-    <section class="graficos reveal" id="graficos">
-
-        <h2>
-
-            Relatórios Financeiros
-
-        </h2>
-
-        <div class="charts">
-
-            <canvas id="pizza"></canvas>
-
-            <canvas id="barra"></canvas>
-
-            <canvas id="linha"></canvas>
-
-        </div>
-
-    </section>
-
-    <!-- SOBRE -->
-
-    <section id="sobre" class="sobre reveal">
-
-        <h2>
-
-            Sobre o Projeto
-
-        </h2>
-
-        <p>
-
-            Este sistema demonstra como a matemática e a tecnologia podem auxiliar no planejamento financeiro,
-            permitindo simulações, análises e tomada de decisões de forma prática e intuitiva.
-
-        </p>
-
-    </section>
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        <p>
-
-            Projeto de Planejamento Financeiro • HTML • CSS • JavaScript • <span id="ano"></span>
-
-        </p>
-
-    </footer>
-
-    <!-- Chart.js -->
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- JS -->
-
-    <script src="script.js"></script>
-
-</body>
-
-</html>
+            <div class="knowledge-grid">
+                <div class="card glass-card info-card">
+                    <div class="info-header">
+                        <i class="fa-solid fa-graduation-cap text-cyan"></i>
+                        <h3>O que é Planejamento Financeiro?</h3>
+                    </div>
+                    <p>Planejamento financeiro é o processo de organizar receitas, despesas e investimentos para alcançar objetivos financeiros e evitar problemas com dívidas.</p>
+                </div>
+
+                <div class="card glass-card info-card">
+                    <div class="info-header">
+                        <i class="fa-solid fa-list-check text-cyan"></i>
+                        <h3>Como controlar gastos?</h3>
+                    </div>
+                    <ul>
+                        <li><i class="fa-solid fa-check text-cyan"></i> Registrar todas as despesas cotidianas.</li>
+                        <li><i class="fa-solid fa-check text-cyan"></i> Criar um orçamento teto mensal rígido.</li>
+                        <li><i class="fa-solid fa-check text-cyan"></i> Evitar compras por impulso aguardando 24h.</li>
+                        <li><i class="fa-solid fa-check text-cyan"></i> Comparar preços entre fornecedores múltiplos.</li>
+                        <li><i class="fa-solid fa-check text-cyan"></i> Revisar os gastos frequentemente todo fim de semana.</li>
+                    </ul>
+                </div>
+
+                <div class="card glass-card info-card">
+                    <div class="info-header">
+                        <i class="fa-solid fa-hand-holding-dollar text-cyan"></i>
+                        <h3>Como economizar dinheiro?</h3>
+                    </div>
+                    <p>Reduza despesas desnecessárias cotidianas, cancele assinaturas recorrentes pouco utilizadas, aproveite promoções sazonais, crie metas estritas de economia e priorize pagar a si mesmo antes de gastar, alimentando constantemente sua reserva.</p>
+                </div>
+
+                <div class="card glass-card info-card">
+                    <div class="info-header">
+                        <i class="fa-solid fa-shield-halved text-cyan"></i>
+                        <h3>O que é Reserva de Emergência?</h3>
+                    </div>
+                    <p>É uma proteção financeira equivalente a 6 ou 12 meses do seu custo de vida guardada em ativos de liquidez diária, voltada puramente para imprevistos drásticos como problemas graves de saúde, desemprego repentino ou reparos imobiliários inesperados.</p>
+                </div>
+
+                <div class="card glass-card info-card">
+                    <div class="info-header">
+                        <i class="fa-solid fa-chart-line text-cyan"></i>
+                        <h3>O que são Juros Compostos?</h3>
+                    </div>
+                    <p>Os juros compostos fazem o dinheiro crescer exponencialmente ao longo do tempo, pois os rendimentos gerados a cada ciclo são integrados à base de capital, passando eles próprios a gerar novos rendimentos ("juros sobre juros").</p>
+                </div>
+
+                <div class="card glass-card info-card">
+                    <div class="info-header">
+                        <i class="fa-solid fa-pie-chart text-cyan"></i>
+                        <h3>Regra Financeira 50-30-20</h3>
+                    </div>
+                    <p>Uma metodologia prática de divisão salarial líquida recomendada por especialistas:</p>
+                    <div class="rule-bar">
